@@ -1,0 +1,25 @@
+name: pipeline-env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.6.0
+  - illumina-interop
+  - pip
+  - pip:
+    - matplotlib
+    - seaborn
+    - cython
+    - numpy
+    - scipy
+    - nltk
+    - line_profiler
+    - memory_profiler
+    - plotly
+    - cufflinks
+    - scikit-learn
+    - statsmodels
+    - pandas==0.23.0
+    - jupyter
+    - jupyterlab
