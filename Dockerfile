@@ -28,4 +28,12 @@ RUN rm -rf /home/$NB_USER/.pyenv
 RUN  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
      bash Miniconda3-latest-Linux-x86_64.sh
  
- 
+COPY environment.yaml /home/$NB_USER/environment.yaml
+
+RUN conda env create --name notebook --file igf-pipelines/environment.yaml
+
+RUN source activate notebook
+
+EXPOSE 8888
+
+CMD ["jupyter","lab","--ip=0.0.0.0","--port=8888","--no-browser","--NotebookApp.iopub_data_rate_limit=100000000"]
