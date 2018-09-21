@@ -35,7 +35,7 @@ RUN conda env create -q --name notebook --file /home/$NB_USER/environment.yaml
 
 RUN echo ". /home/$NB_USER/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate notebook" >> ~/.bashrc && \
-    source ~/.bashrc
+    . /home/$NB_USER/.bashrc
 
 EXPOSE 8888
 
