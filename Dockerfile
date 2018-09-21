@@ -26,7 +26,7 @@ WORKDIR /home/$NB_USER
 RUN rm -rf /home/$NB_USER/.pyenv
 
 RUN  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-     bash Miniconda3-latest-Linux-x86_64.sh
+     bash Miniconda3-latest-Linux-x86_64.sh -b
  
 COPY environment.yaml /home/$NB_USER/environment.yaml
 
