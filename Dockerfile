@@ -30,6 +30,7 @@ RUN  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh 
  
 COPY environment.yaml /home/$NB_USER/environment.yaml
 
+ENV PATH $PATH:/home/$NB_USER/miniconda3/bin/
 RUN conda env create -q --name notebook --file /home/$NB_USER/environment.yaml
 
 RUN source activate notebook
