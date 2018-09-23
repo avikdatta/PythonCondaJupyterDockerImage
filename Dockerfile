@@ -39,4 +39,6 @@ RUN echo ". /home/$NB_USER/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && \
 
 EXPOSE 8888
 
-CMD ["jupyter","lab","--ip=0.0.0.0","--port=8888","--no-browser","--NotebookApp.iopub_data_rate_limit=100000000"]
+COPY run_jupyter.sh /home/$NB_USER/run_jupyter.sh
+
+CMD ["bash","/home/$NB_USER/run_jupyter.sh"]
