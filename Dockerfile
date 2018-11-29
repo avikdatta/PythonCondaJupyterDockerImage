@@ -31,15 +31,12 @@ RUN  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh 
 COPY environment.yaml /home/$NB_USER/environment.yaml
 
 ENV PATH $PATH:/home/$NB_USER/miniconda3/bin/
-RUN conda env create -q --name notebook --file /home/$NB_USER/environment.yaml
+RUN conda env create -q --name base --file /home/$NB_USER/environment.yaml
 
 RUN echo ". /home/$NB_USER/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate notebook" >> ~/.bashrc && \
-    . /home/$NB_USER/.bashrc
+    echo "conda activate base" >> ~/.bashrc
 
 EXPOSE 8888
-
-COPY run_jupyter.sh /home/$NB_USER/run_jupyter.sh
 
 USER root
 ENV TINI_VERSION v0.18.0
@@ -47,4 +44,4 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod a+x /tini
 ENTRYPOINT [ "/tini", "--" ]
 USER $NB_USER
-CMD ["bash","/home/$NB_USER/run_jupyter.sh"]
+CMD [ "jupyter","lab","--ip","0.0.0.0","--port","8888","--no-browser" ]
