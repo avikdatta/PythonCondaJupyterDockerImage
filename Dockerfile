@@ -41,7 +41,10 @@ EXPOSE 8888
 
 COPY run_jupyter.sh /home/$NB_USER/run_jupyter.sh
 
+USER root
 ENV TINI_VERSION v0.18.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /home/$NB_USER/tini
-ENTRYPOINT [ "/home/$NB_USER/tini", "--" ]
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod a+x /tini
+ENTRYPOINT [ "/tini", "--" ]
+USER $NB_USER
 CMD ["bash","/home/$NB_USER/run_jupyter.sh"]
