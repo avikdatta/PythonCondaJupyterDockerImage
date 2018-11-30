@@ -34,7 +34,7 @@ ENV PATH $PATH:/home/$NB_USER/miniconda3/bin/
 RUN conda env create -q --file /home/$NB_USER/environment.yaml
 
 RUN echo ". /home/$NB_USER/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
+    echo "conda activate pipeline-env" >> ~/.bashrc
 
 EXPOSE 8888
 
