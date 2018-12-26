@@ -3,11 +3,14 @@ channels:
   - conda-forge
   - bioconda
   - defaults
+  - r
 dependencies:
+  - r-base==3.5.2
   - python=3.6.0
   - illumina-interop
   - pip
   - pip:
+    - rpy2==2.9.5
     - matplotlib
     - seaborn
     - cython
@@ -23,3 +26,4 @@ dependencies:
     - pandas==0.23.0
     - jupyter
     - jupyterlab
+    - ipywidgets
