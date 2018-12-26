@@ -39,7 +39,6 @@ RUN echo ". /home/$NB_USER/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && \
 
 USER root
 RUN npm install -g configurable-http-proxy && \
-    jupyter nbextension enable --py --sys-prefix widgetsnbextension && \
     rm -rf /root/.cache
 
 USER root
@@ -47,7 +46,9 @@ ENV TINI_VERSION v0.18.0
 RUN wget --quiet  https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini && \
     mv tini /usr/local/bin/tini && \ 
     chmod +x /usr/local/bin/tini
- 
+
+RUN /home/$NB_USER/miniconda3/envs/pipeline-env/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
 USER $NB_USER
 EXPOSE 8888
 
