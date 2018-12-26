@@ -10,7 +10,6 @@ dependencies:
   - illumina-interop
   - pip
   - pip:
-    - rpy2==2.9.5
     - matplotlib
     - seaborn
     - cython
