@@ -5,7 +5,7 @@ channels:
   - defaults
   - r
 dependencies:
-  - r-base==3.5.1
+  - r-base
   - python=3.6.0
   - illumina-interop
   - pip
