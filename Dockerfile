@@ -16,6 +16,7 @@ RUN apt-get -y update &&   \
     sqlite3                \
     libhdf5-serial-dev     \
     libigraph0-dev         \
+    npm nodejs-legacy      \
     &&  apt-get purge -y --auto-remove \
     &&  apt-get clean \
     &&  rm -rf /var/lib/apt/lists/*
@@ -36,12 +37,19 @@ RUN conda env create -q --file /home/$NB_USER/environment.yaml
 RUN echo ". /home/$NB_USER/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate pipeline-env" >> ~/.bashrc
 
-EXPOSE 8888
+USER root
+RUN npm install -g configurable-http-proxy && \
+    jupyter nbextension enable --py --sys-prefix widgetsnbextension && \
+    rm -rf /root/.cache
 
 USER root
 ENV TINI_VERSION v0.18.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod a+x /tini
-ENTRYPOINT [ "/tini", "--" ]
+RUN wget --quiet  https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini && \
+    mv tini /usr/local/bin/tini && \ 
+    chmod +x /usr/local/bin/tini
+ 
 USER $NB_USER
+EXPOSE 8888
+
+ENTRYPOINT ["/usr/local/bin/tini", "--"]
 CMD [ "jupyter","lab","--ip","0.0.0.0","--port","8888","--no-browser" ]
