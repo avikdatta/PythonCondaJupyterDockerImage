@@ -21,6 +21,8 @@ RUN apt-get -y update &&   \
     &&  apt-get clean \
     &&  rm -rf /var/lib/apt/lists/*
     
+COPY scripts/entrypoint.sh /home/$NB_USER/entrypoint.sh
+
 USER $NB_USER
 WORKDIR /home/$NB_USER
 
@@ -52,5 +54,8 @@ RUN /home/$NB_USER/miniconda3/envs/pipeline-env/bin/jupyter nbextension enable -
 USER $NB_USER
 EXPOSE 8888
 
-ENTRYPOINT ["/usr/local/bin/tini", "--"]
-CMD [ "jupyter","lab","--ip","0.0.0.0","--port","8888","--no-browser" ]
+#ENTRYPOINT ["/usr/local/bin/tini", "--"]
+#CMD [ "jupyter","lab","--ip","0.0.0.0","--port","8888","--no-browser" ]
+
+ENTRYPOINT ["bash","/home/$NB_USER/entrypoint.sh"]
+CMD ["webserver"]
