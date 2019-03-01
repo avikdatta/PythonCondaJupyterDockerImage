@@ -57,5 +57,5 @@ EXPOSE 8888
 #ENTRYPOINT ["/usr/local/bin/tini", "--"]
 #CMD [ "jupyter","lab","--ip","0.0.0.0","--port","8888","--no-browser" ]
 
-ENTRYPOINT ["bash","/home/$NB_USER/entrypoint.sh"]
+ENTRYPOINT ["bash","/home/vmuser/entrypoint.sh"]
 CMD ["webserver"]
