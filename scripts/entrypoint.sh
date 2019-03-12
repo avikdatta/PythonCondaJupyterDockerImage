@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+source ~/.bashrc
+conda activate pipeline-env
+
 case "$1" in
   webserver)
   sleep 10
