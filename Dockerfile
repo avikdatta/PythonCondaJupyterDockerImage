@@ -21,8 +21,6 @@ RUN apt-get -y update &&   \
     &&  apt-get clean \
     &&  rm -rf /var/lib/apt/lists/*
     
-COPY scripts/entrypoint.sh /home/$NB_USER/entrypoint.sh
-
 USER $NB_USER
 WORKDIR /home/$NB_USER
 
@@ -51,11 +49,11 @@ RUN wget --quiet  https://github.com/krallin/tini/releases/download/${TINI_VERSI
 
 RUN /home/$NB_USER/miniconda3/envs/pipeline-env/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
+
 USER $NB_USER
+RUN rm -rf tmp
 EXPOSE 8888
 
-#ENTRYPOINT ["/usr/local/bin/tini", "--"]
-#CMD [ "jupyter","lab","--ip","0.0.0.0","--port","8888","--no-browser" ]
 
-ENTRYPOINT ["bash","/home/vmuser/entrypoint.sh"]
-CMD ["webserver"]
+ENTRYPOINT ["/usr/local/bin/tini", "--"]
+CMD [ "/bin/bash" ]
