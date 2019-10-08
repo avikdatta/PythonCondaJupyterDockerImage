@@ -17,6 +17,7 @@ RUN apt-get -y update &&   \
     libhdf5-serial-dev     \
     libigraph0-dev         \
     npm nodejs-legacy      \
+    default-jr             \
     &&  apt-get purge -y --auto-remove \
     &&  apt-get clean \
     &&  rm -rf /var/lib/apt/lists/*
