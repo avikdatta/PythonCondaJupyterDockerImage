@@ -49,7 +49,7 @@ RUN wget --quiet  https://github.com/krallin/tini/releases/download/${TINI_VERSI
     mv tini /usr/local/bin/tini && \ 
     chmod +x /usr/local/bin/tini
 
-RUN /home/$NB_USER/miniconda3/envs/pipeline-env/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
+#RUN /home/$NB_USER/miniconda3/envs/pipeline-env/bin/jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 
 USER $NB_USER
