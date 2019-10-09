@@ -39,9 +39,9 @@ RUN echo "conda deactivate" >> ~/.bashrc && \
     echo "conda activate pipeline-env" >> ~/.bashrc
 
 USER root
-RUN npm install -g configurable-http-proxy && \
-    rm -rf /root/.cache && \
-    rm -rf /home/${NB_USER}/tmp
+#RUN npm install -g configurable-http-proxy && \
+#    rm -rf /root/.cache && \
+#    rm -rf /home/${NB_USER}/tmp
 
 
 ENV TINI_VERSION v0.18.0
